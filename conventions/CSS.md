@@ -40,7 +40,7 @@ For example:
 
 ## Naming
 
-All ids, classes and attributes must be lowercase with hyphens used for separation.
+All ids, classes and attributes must be kebab-case or lowercase with hyphens used for separation.
 
      /* GOOD */
      .dataset-list {}

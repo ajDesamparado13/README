@@ -1,10 +1,10 @@
 # IMPORTANT README
 
-MY README NOTES FOR PROJECT DEVELOPMENT
-
-## Documentation
+README NOTES FOR STARTING / MAINTAINING OF SOFTWARE APPLICATION PROJECT
 
 ## Conventions
+
+The following are the coding conventions for specified languages divided into 3 categories:
 
 - **Server side**
   - [Laravel](conventions/Laravel.md)
@@ -13,7 +13,9 @@ MY README NOTES FOR PROJECT DEVELOPMENT
   - [SCSS](conventions/SCSS.md)
   - [HTML](conventions/HTML.md)
   - [JavaScript](conventions/Javascript.md)
+  - [VueJS](conventions/VueJS.md)
 - **System administration**
+  - [ShellScript]
 
 ## Guidelines
 
@@ -23,6 +25,12 @@ MY README NOTES FOR PROJECT DEVELOPMENT
   - General Git guideline
   - Creating a branching
   - Git Ignore
+
+## Configurations
+
+The following are the common configurations:
+
+- [ Git Ignore ](Configurations/Gitignore.md)
 
 # Packages
 
