@@ -30,7 +30,12 @@ The following are the coding conventions for specified languages divided into 3 
 
 The following are the common configurations:
 
-- [ Git Ignore ](Configurations/Gitignore.md)
+- [ Git Ignore ](configurations/Gitignore.md)
+
+## Project
+
+- [ Quality ](guidelines/project.md)
+- Delivery process
 
 # Packages
 
@@ -38,3 +43,4 @@ The following are the common configurations:
 
 - [Laravel Boilerplate](https://github.com/ajDesamparado13/j-laravel-vue-boilerplate)
 - [Vue UI Collection](https://github.com/ajDesamparado13/j-ui)
+- [Sass and CSS pack](https://github.com/ajDesamparado13/css-pack)
