@@ -30,7 +30,7 @@ The following are the coding conventions for specified languages divided into 3 
 
 The following are the common configurations:
 
-- [ Git Ignore ](configurations/Gitignore.md)
+- [ Git Ignore ](configurations/GitIgnore.md)
 
 ## Project
 
