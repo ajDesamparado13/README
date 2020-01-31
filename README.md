@@ -19,6 +19,9 @@ The following are the categorized coding conventions for specified languages
 
 - [ Project ](guidelines/project.md)
 
+  - [Base Requirements](guidelines/project.md#base-requirements)
+  - [Source Code Quality](guidelines/project.md#source-code-quality)
+
 ## How to
 
 - **Creating a project**
@@ -53,8 +56,6 @@ The following are the categorized coding conventions for specified languages
 The following are the common configurations:
 
 - [ Git ignore ](configurations/GitIgnore.md)
-
-## Project
 
 # Packages
 
