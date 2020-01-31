@@ -39,7 +39,7 @@ Before the project is delivered to the client, the process of software delivery 
 8. Client tests the deliverable in staging server. hopefully satisfied;
    - in the case a bug / issue is found, an issue is then raised by project manager, tagging both QA,member and lead developer
 9. Client approves of the deliverable to be released to production server.
-10. The assigned DevOps will then merged the release to production server.
+10. An assigned DevOps will then merged the release to production server.
 
 > Note:
 >
