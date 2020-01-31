@@ -6,13 +6,9 @@ Common:
     /node_modules
     /public/hot
     /public/storage
-    /public/_.js
-    /public/js
-    /public/_.css
     /public/mix-manifest.json
-    /public/css
     /public/.htaccess
-    /public/fonts/\*
+    /public/fonts/*
     /.idea
     /.vscode
     /.vagrant
@@ -33,3 +29,10 @@ Must be deliberated:
     composer.lock
 
 Depending on how the deliverables is being released, the lock files may or may not be needed to be tracked into the version control.
+
+    /public/*.js
+    /public/js
+    /public/*.css
+    /public/css
+
+In some projects that does contain compiled / system generated javascript and css using sass/scss through a compiler i.e npm. the public js and css files above must then be ignored.
