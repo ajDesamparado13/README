@@ -22,6 +22,8 @@ The following are the categorized coding conventions for specified languages
   - [Base Requirements](guidelines/project.md#base-requirements)
   - [Source Code Quality](guidelines/project.md#source-code-quality)
 
+- [ Code Documentation ](guidelines/code-documentation.md)
+
 ## How to
 
 - **Creating a project**
