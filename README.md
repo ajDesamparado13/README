@@ -26,6 +26,10 @@ The following are the categorized coding conventions for specified languages
 
 ## How to
 
+- System Administration
+
+  - [How to create swapfile](how-to/how-to-create-swapfile.md)
+
 - **Creating a project**
   - [How to start a project](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-start-a-project.md)
   - [How to build a package](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-build-a-package.md)
