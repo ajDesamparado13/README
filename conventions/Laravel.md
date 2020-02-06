@@ -1,565 +1,178 @@
-# Laravel & PHP Style Guide
-
-- [About Laravel](#about-laravel)
-- [General PHP Rules](#general-php-rules)
-- [Class defaults](#class-defaults)
-- [Docblocks](#docblocks)
-- [Strings](#Strings)
-- [If statements](#if-statements)
-- [Ternary operators](#ternary-operators)
-- [Comments](#comments)
-- [Configuration](#configuration)
-- [Artisan Commands](#artisan-commands)
-- [Routing](#routing)
-- [Controllers](#controllers)
-- [Views](#views)
-- [Validation](#validation)
-- [Blade Templates](#blade-templates)
-- [Authorization](#Authorization)
-- [Translations](#translation)
-- [Naming classes](#naming-classes)
-- [Messages](#messages)
+# Laravel Style Guide
 
-## About Laravel<a name="about-laravel"></a>
+## Naming
 
-First and foremost, Laravel provides the most value when you write things the way Laravel intended you to write. If there's a documented way to achieve something, follow it. Whenever you do something differently, make sure you have a justification for why you didn't follow the defaults.
-General PHP Rules
+### **Database Table**
 
-Code style must follow PSR-1, PSR-2 and PSR-12. Generally speaking, everything string-like that's not public-facing should use camelCase. Detailed examples on these are spread throughout the guide in their relevant sections.
-Class defaults
+DB tables should be descriptive in plural form, with underscores to separate words (snake_case) and lower case
 
-Try to keep the "O" of SOLID in your mind: code should be open for extension, but closed for modification. That's why you should use private as the default visibility modifier, and final as the default for classes.
+- Good Examples:
 
-This way you're encouraged to think before opening up your classes to the outside world. You should take a moment to think about possible other ways to solve a problem instead of opening up classes. You could for example rely more on composition, dependency injection and interfaces; instead of extending classes.
+  - posts
+  - project_tasks
+  - uploaded_images
 
-Especially in the context of open source packages, you're encouraged to think twice about making a method public or protected, or opening a class for extension. Every entry point in your code that is open for the public to use, is an entry point you'll have to maintain with backwards compatibility in mind.
+- Bad example
+  - all_posts ( good but the "all" gives an ambiguous meaning)
+  - Posts ( not in lowercase)
+  - post ( not in plural form)
+  - blogPosts ( not in snake_case and lowercase)
 
-For now we don't use declare(strict_types = 1);
-Void return types
+#### Pivot tables
 
-If a method return nothing, it should be indicated with void. This makes it more clear to the users of your code what your intention was when writing it.
-Docblocks
+Pivot tables should be all lower case, with each model in alphabetical order, noun formation descriptive on the relationship and separated by an underscore (snake_case).
 
-Don't use docblocks for methods that can be fully type hinted (unless you need a description).
+- Good examples:
 
-Only add a description when it provides more context than the method signature itself. Use full sentences for descriptions, including a period at the end.
+  - post_user
+  - task_user
 
-// Good
-final class Url
-{
-public static function fromString(string \$url): Url
-{
-// ...
-}
-}
+- Bad examples:
+- users_posts ( not descriptive of the relationship)
+- UsersPosts ( not in snake case)
+- users_abc ( abc is not a model entity, not in alphabetical order)
 
-// Bad: The description is redundant, and the method is fully type-hinted.
-final class Url
-{
-/\*\*
-_ Create a url from a string.
-_
-_ @param string \$url
-_
-_ @return \Spatie\Url\Url
-_/
-public static function fromString(string \$url): Url
-{
-// ...
-}
-}
+#### Table columns names
 
-Always use fully qualified class names in docblocks.
+Table column names should be in lower case, and snake_case (underscores between words). You shouldn't reference the table name.
 
-// Good
+- For example: post_body, id, created_at.
+- Bad examples: blog_post_created_at, forum_thread_title, threadTitle.
 
-/\*\*
+#### Primary Key
 
-- @param string \$url
--
-- @return \Spatie\Url\Url
-  \*/
+This should normally be id.
 
-// Bad
+#### Foreign Keys
 
-/\*\*
+Foreign keys should be the model name (singular), with '\_id' appended to it (assuming the PK in the other table is 'id').
 
-- @param string \$foo
--
-- @return Url
-  \*/
+- For example: comment_id, user_id.
 
-Docblocks for class variables are required, as there's currently no other way to typehint these.
+#### Variables
 
-// Good
+Normal variables should typically be in camelCase, with the first character lower case.
 
-final class Foo
-{
-/\*_ @var \Spatie\Url\Url _/
-private \$url;
+For example: $users = ..., $bannedUsers = ....
+Bad examples: $all_banned_users = ..., $Users=....
 
-    /** @var string */
-    private $name;
+If the variable contains an array or collection of multiple items then the variable name should be in plural. Otherwise, it should be in singular form.
 
-}
+For example: `$users = User::all();` (as this will be a collection of multiple User objects), but \$user = User::first() (as this is just one object)
 
-// Bad
+### **Naming Conventions for models**
 
-final class Foo
-{
-private $url;
-    private $name;
-}
+#### Naming Models in Laravel
 
-When possible, docblocks should be written on one line.
+A model should be in singular, no spacing between words, and capitalised.
 
-// Good
+- For example: User (\App\User or \App\Models\User, etc), ForumThread, Comment.
+- Bad examples: Users, ForumPosts, blogpost, blog_post, Blog_posts.
 
-/** @var string \*/
-/** @test \*/
+Generally, your models should be able to automatically work out what database table it should use from the following laravel method:
 
-// Bad
+        /**
+         * Get the table associated with the model.
+         *
+         * @return string
+         */
+        public function getTable()
+        {
+            if (! isset($this->table)) {
+                return str_replace(
+                    '\\', '', Str::snake(Str::plural(class_basename($this)))
+                );
+            }
 
-/\*\*
+            return $this->table;
+        }
 
-- @test
-  \*/
+But of course you can just set `$this->table in your model`.
 
-If a variable has multiple types, the most common occurring type should be first.
+Creating models and migrations at the same time by running `php artisan make:model -m ForumPost` is **recommended**. This will auto-generate the migration file (in this case, for a DB table name of `forum_posts`).
 
-// Good
+#### Model properties
 
-/\*_ @var \Spatie\Goo\Bar|null _/
+These should be lower case, snake_case. Generally they should also follow the same conventions as the table column names.
 
-// Bad
+- For example: $this->updated_at, $this->title.
+- Bad examples: $this->UpdatedAt, $this->blogTitle.
 
-/\*_ @var null|\Spatie\Goo\Bar _/
+#### Model Methods
 
-Strings
+Methods in your models in Laravel projects, like all methods in your Laravel projects, should be camelCase.
 
-When possible prefer string interpolation above sprintf and the . operator.
+- For example: public function get(), public function getAll().
+- Bad examples: public function GetPosts(), public function get_posts().
 
-// Good
-$greeting = "Hi, I am {$name}.";
+### **Relationships**
 
-// Bad
-$greeting = 'Hi, I am ' . $name . '.';
+#### hasOne or belongsTo relationship (one to many)
 
-Ternary operators
+These should be singular form and follow the same naming conventions of normal model methods (camelCase)
 
-Every portion of a ternary expression should be on its own line unless it's a really short expression.
+- For example: public function postAuthor(), public function phone().
 
-// Good
-$result = $object instanceof Model
-? \$object->name
-: 'A default value';
+#### hasMany, belongsToMany, hasManyThrough (one to many)
 
-$name = $isFoo ? 'foo' : 'bar';
+These should be the same as the one to many naming conventions, however, its should be in plural.
 
-// Bad
-$result = $object instanceof Model ?
-\$object->name :
-'A default value';
+- For example: public function comments(), public function roles().
 
-If statements
-Bracket position
+#### Polymorphic relationships
 
-Always use curly brackets.
+These can be a bit awkward to get the naming correct.
 
-// Good
-if (\$condition) {
-...
-}
+Ideally, you want to be able to have a method such as this:
 
-// Bad
-if (\$condition) ...
-
-Happy path
-
-Generally a function should have its unhappy path first and its happy path last. In most cases this will cause the happy path being in an unindented part of the function which makes it more readable.
-
-// Good
-
-if (! \$goodCondition) {
-throw new Exception;
-}
-
-// do work
-
-// Bad
-
-if (\$goodCondition) {
-// do work
-}
-
-throw new Exception;
-
-Avoid else
-
-In general, else should be avoided because it makes code less readable. In most cases it can be refactored using early returns. This will also cause the happy path to go last, which is desirable.
-
-// Good
-
-if (! \$conditionBA) {
-// conditionB A failed
-
-return;
-}
-
-if (! \$conditionB) {
-// conditionB A passed, B failed
-
-return;
-}
-
-// condition A and B passed
-
-// Bad
-
-if ($conditionA) {
-   if ($conditionB) {
-// condition A and B passed
-}
-else {
-// conditionB A passed, B failed
-}
-}
-else {
-// conditionB A failed
-}
-
-Compound ifs
-
-In general, separate if statements should be preferred over a compound condition. This makes debugging code easier.
-
-// Good
-if (! \$conditionA) {
-return;
-}
-
-if (! \$conditionB) {
-return;
-}
-
-if (! \$conditionC) {
-return;
-}
-
-// do stuff
-
-// bad
-if ($conditionA && $conditionB && \$conditionC) {
-// do stuff
-}
-
-Comments
-
-Comments should be avoided as much as possible by writing expressive code. If you do need to use a comment, format it like this:
-
-// There should be a space before a single line comment.
-
-/\*
-
-- If you need to explain a lot you can use a comment block. Notice the
-- single \* on the first line. Comment blocks don't need to be three
-- lines long or three characters shorter than the previous line.
-  \*/
-
-Whitespace
-
-Statements should have to breathe. In general always add blank lines between statements, unless they're a sequence of single-line equivalent operations. This isn't something enforceable, it's a matter of what looks best in its context.
-
-// Good
-public function getPage($url)
-{
-    $page = $this->pages()->where('slug', $url)->first();
-
-    if (! $page) {
-        return null;
-    }
-
-    if ($page['private'] && ! Auth::check()) {
-        return null;
-    }
-
-    return $page;
-
-}
-
-// Bad: Everything's cramped together.
-public function getPage($url)
-{
-    $page = $this->pages()->where('slug', $url)->first();
-if (! $page) {
-        return null;
-    }
-    if ($page['private'] && ! Auth::check()) {
-return null;
-}
-return \$page;
-}
-
-// Good: A sequence of single-line equivalent operations.
-public function up()
-{
-Schema::create('users', function (Blueprint $table) {
-        $table->increments('id');
-$table->string('name');
-        $table->string('email')->unique();
-$table->string('password');
-        $table->rememberToken();
-\$table->timestamps();
-});
-}
-
-Don't add any extra empty lines between {} brackets.
-
-// Good
-if ($foo) {
-    $this->foo = \$foo;
-}
-
-// Bad
-if (\$foo) {
-
-    $this->foo = $foo;
-
-}
-
-Configuration
-
-Configuration files must use kebab-case.
-
-config/
-pdf-generator.php
-
-Configuration keys must use snake_case.
-
-// config/pdf-generator.php
-return [
-'chrome_path' => env('CHROME_PATH'),
-];
-
-Avoid using the env helper outside of configuration files. Create a configuration value from the env variable like above.
-Artisan commands
-
-The names given to artisan commands should all be kebab-cased.
-
-# Good
-
-php artisan delete-old-records
-
-# Bad
-
-php artisan deleteOldRecords
-
-A command should always give some feedback on what the result is. Minimally you should let the handle method spit out a comment at the end indicating that all went well.
-
-// in a Command
-public function handle()
-{
-// do some work
-
-    $this->comment('All ok!');
-
-}
-
-If possible use a descriptive success message eg. Old records deleted.
-Routing
-
-Public-facing urls must use kebab-case.
-
-https://spatie.be/open-source
-https://spatie.be/jobs/front-end-developer
-
-Route names must use camelCase.
-
-Route::get('open-source', 'OpenSourceController@index')->name('openSource');
-
-<a href="{{ route('openSource') }}">
-    Open Source
-</a>
-
-All routes have an http verb, that's why we like to put the verb first when defining a route. It makes a group of routes very readable. Any other route options should come after it.
-
-// good: all http verbs come first
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('open-source', 'OpenSourceController@index')->middleware('openSource');
-
-// bad: http verbs not easily scannable
-Route::name('home')->get('/', 'HomeController@index');
-Route::middleware('openSource')->get('OpenSourceController@index');
-
-Route parameters should use camelCase.
-
-Route::get('news/{newsItem}', 'NewsItemsController@index');
-
-A route url should not start with / unless the url would be an empty string.
-
-// good
-Route::get('/', 'HomeController@index');
-Route::get('open-source', 'OpenSourceController@index');
-
-//bad
-Route::get('', 'HomeController@index');
-Route::get('/open-source', 'OpenSourceController@index');
-
-Controllers
-
-Controllers that control a resource must use the plural resource name.
-
-final class PostsController
-{
-// ...
-}
-
-Try to keep controllers simple and stick to the default CRUD keywords (index, create, store, show, edit, update, destroy). Extract a new controller if you need other actions.
-
-In the following example, we could have PostsController@favorite, and PostsController@unfavorite, or we could extract it to a separate FavoritePostsController.
-
-final class PostsController
-{
-public function create()
-{
-// ...
-}
-
-    // ...
-
-    public function favorite(Post $post)
+    public function category()
     {
-        request()->user()->favorites()->attach($post);
-
-        return response(null, 200);
+        return $this->morphMany('App\Category', 'categoryable');
     }
 
-    public function unfavorite(Post $post)
-    {
-        request()->user()->favorites()->detach($post);
+And Laravel will by default assume that there is a categoryable_id and categoryable_type.
 
-        return response(null, 200);
-    }
+But you can use the other optional parameters for `morphMany ( public function morphMany($related, $name, $type = null, $id = null, \$localKey = null))` to change the defaults.
 
-}
+## Controllers
 
-Here we fall back to default CRUD words, store and destroy.
+### Naming Controller
 
-final class FavoritePostsController
-{
-public function store(Post $post)
-    {
-        request()->user()->favorites()->attach($post);
+Controllers should be in singular form, Uppercase First Letter of every word (PascalCase), no spacing between words, and ends with "Controller".
 
-        return response(null, 200);
-    }
+- Good Examples:
 
-    public function destroy(Post $post)
-    {
-        request()->user()->favorites()->detach($post);
+  - BlogController,
+  - AuthController
+  - UserController
 
-        return response(null, 200);
-    }
+- Bad examples:
+  - **UsersController** (because it is in plural),
+  - **Users** (because it is missing the Controller suffix).
 
-}
+### Naming Methods in controllers
 
-This is a loose guideline that doesn't need to be enforced.
-Views
+These should follow the same rules as model methods. I.e. camelCase (first character lowercase).
 
-View files must use camelCase.
+In addition, for normal CRUD operations, they should use one of the following method names.
 
-resources/
-views/
-openSource.blade.php
+    Verb        URI                     Method Name     Route Name
+    GET         /photos                 index()         photos.index
+    GET         /photos/create          create()        photos.create
+    POST        /photos                 store()         photos.store
+    GET         /photos/{photo}         show()          photos.show
+    GET         /photos/{photo}/edit    edit()          photos.edit
+    PUT/PATCH   /photos/{photo}         update()        photos.update
+    DELETE      /photos/{photo}         destroy()       photos.destroy
 
-final class OpenSourceController
-{
-public function index() {
-return view('openSource');
-}
-}
+## Traits
 
-Validation
+Traits should be be singular adjective words.
 
-All custom validation rules must use snake_case:
+- For example: Notifiable, Dispatchable
 
-Validator::extend('organisation_type', function ($attribute, $value) {
-return OrganisationType::isValid(\$value);
-});
+## Blade view files
 
-Blade Templates
+Blade files should be in snake_case.
 
-Indent using four spaces.
-
-<a href="/open-source">
-    Open Source
-</a>
-
-Don't add spaces after control structures.
-
-@if(\$condition)
-Something
-@endif
-
-Authorization
-
-Policies must use camelCase.
-
-Gate::define('editPost', function ($user, $post) {
-return $user->id == $post->user_id;
-});
-
-@can('editPost', $post)
-    <a href="{{ route('posts.edit', $post) }}">
-Edit
-</a>
-@endcan
-
-Try to name abilities using default CRUD words. One exception: replace show with view. A server shows a resource, a user views it.
-Translations
-
-Translations must be rendered with the ** function. We prefer using this over @lang in Blade views because ** can be used in both Blade views and regular PHP code. Here's an example:
-
-<h2>{{ __('newsletter.form.title') }}</h2>
-
-{!! \_\_('newsletter.form.description') !!}
-
-Naming Classes
-
-Naming things is often seen as one of the harder things in programming. That's why we've established some high level guidelines for naming classes.
-Controllers
-
-Generally controllers are named by the plural form of their corresponding resource and a Controller suffix. This is to avoid naming collisions with models that are often equally named.
-
-e.g. UsersController or EventDaysController
-
-When writing non-resourceful controllers you might come across invokable controllers that perform a single action. These can be named by the action they perform again suffixed by Controller.
-
-e.g. PerformCleanupController
-Resources (and transformers)
-
-Both Eloquent resources and Fractal transformers are plural resources suffixed with Resource or Transformer accordingly. This is to avoid naming collisions with models.
-Jobs
-
-A job's name should describe its action.
-
-E.g. CreateUser or PerformDatabaseCleanup
-Events
-
-Events will often be fired before or after the actual event. This should be very clear by the tense used in their name.
-
-E.g. ApprovingLoan before the action is completed and LoanApproved after the action is completed.
-Listeners
-
-Listeners will perform an action based on an incoming event. Their name should reflect that action with a Listener suffix. This might seem strange at first but will avoid naming collisions with jobs.
-
-E.g. SendInvitationMailListener
-Commands
-
-To avoid naming collisions we'll suffix commands with Command, so they are easiliy distinguisable from jobs.
-
-e.g. PublishScheduledPostsCommand
-Mailables
-
-Again to avoid naming collisions we'll suffix mailables with Mail, as they're often used to convey an event, action or question.
-
-e.g. AccountActivatedMail or NewEventMail
+- For example: all.blade.php, all_posts.blade.php
