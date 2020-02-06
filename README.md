@@ -26,7 +26,7 @@ The following are the categorized coding conventions for specified languages
 
 ## How to
 
-- System Administration
+- **System Administration**
 
   - [How to create swapfile](how-to/system_administration/how-to-create-swapfile.md)
 
@@ -62,6 +62,10 @@ The following are the categorized coding conventions for specified languages
 The following are the common configurations:
 
 - [ Git ignore ](configurations/GitIgnore.md)
+
+# Common issues encountered
+
+- [proc_open(): fork failed - Cannot allocate memory](common_issues/proc_open.md)
 
 # Packages
 
