@@ -4,8 +4,52 @@ Swap is a space on a disk that is used when the amount of physical RAM memory is
 
 Swap space can take the form of either a dedicated swap partition or a swap file. In most cases when running Linux on a virtual machine a swap partition is not present so our only option is to create a swap file.
 
-Follow these steps to add 1GB of swap to your server. If you want to add 2GB instead of 1 GB, replace 1G with 2G.
+## Check the System for Swap Information
 
+Before we begin, we will take a look at our operating system to see if we already have some swap space available. We can have multiple swap files or swap partitions, but generally one should be enough.
+
+We can see if the system has any configured swap by typing:
+
+    sudo swapon -s
+
+    Filename                Type        Size    Used    Priority
+
+If you only get back the header of the table, as I’ve shown above, you do not currently have any swap space enabled.
+
+Another, more familiar way of checking for swap space is with the free utility, which shows us system memory usage. We can see our current memory and swap usage in Megabytes by typing:
+
+    free -m
+
+                  total       used      free     shared    buffers     cached
+    Mem:            983       372        113          0        497        452
+    -/+ buffers/cache:         62       3890
+    Swap:            0          0          0
+
+As you can see above, our total swap space in the system is “0”. This matches what we saw with the previous command.
+
+## Check Available Space on the Hard Drive Partition
+
+The typical way of allocating space for swap is to use a separate partition devoted to the task. However, altering the partitioning scheme is not always possible. We can just as easily create a swap file that resides on an existing partition.
+
+Before we do this, we should be aware of our current disk usage. We can get this information by typing:
+
+    df -h
+
+    Filesystem       Size  Used   Avail   Use%    Mounted on
+    /dev/xvda1        30G   15G    18G    49%     /
+    devtmpfs         475M     0   475M     0%     /dev
+    tmpfs            492M     0   492M     0%     /dev/shm
+    tmpfs            492M  400K   492M     1%     /run
+    tmpfs            492M     0   492M     0%     /sys/fs/cgroup
+    tmpfs             99M     0    99M     0%     /run/user/1000
+
+As you can see on the first line, our hard drive partition has 18 Gigabytes available, so we have a huge amount of space to work with.
+
+## Creating swap file
+
+Although there are many opinions about the appropriate size of a swap space, it really depends on your personal preferences and your application requirements. Generally, an amount equal to or double the amount of RAM on your system is a good starting point.
+
+**Follow these steps to add 1GB of swap to your server. If you want to add 2GB instead of 1 GB, replace 1G with 2G or 1024 with 2048k.**
 <br>
 <br>
 
