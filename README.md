@@ -64,11 +64,20 @@ The following are the common configurations:
 
 - [ Git ignore ](configurations/GitIgnore.md)
 
-# Common issues encountered
+## Common issues encountered
 
 - [proc_open(): fork failed - Cannot allocate memory](common_issues/proc_open.md)
 
-# Packages
+## Editor and their awesome extensions
+
+- [ Visual Studio Code ](https://code.visualstudio.com/)
+  - [BetterComments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments) Improve your code commenting by annotating with alert, informational, TODOs, and more!
+  - [Project Manager](https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager) Easily switch between projects
+  - [Hungry Delete](https://marketplace.visualstudio.com/items?itemName=jasonlhy.hungry-delete) To delete an entire block of whitespace or tab, and reduce the time programmers need to press backspace
+  - [TODO Highlight](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) highlight TODOs, FIXMEs, and any keywords, annotations...
+  - [GitLens](https://gitlens.amod.io/) Quickly glimpse into whom, why, and when a line or code block was changed.
+
+## Packages
 
 ### Made by [ajDesamparado13](https://github.com/ajDesamparado13)
 
