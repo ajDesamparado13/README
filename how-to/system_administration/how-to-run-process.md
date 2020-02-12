@@ -1,4 +1,21 @@
-# How to run persistent processes in background
+# How to run processes on linux
+
+## Run processes in background
+
+To run process in background simply append `&` at the end of the command
+
+    $ php artisan queue:work &
+
+However this will terminate the background process when the terminal is exited.
+
+To run process in background and prevent from terminating even after terminal is exited simply execute `disown` after running the process in background.
+
+     $ php artisan queue:work &
+     $ disown
+
+## Run processes persistently in background
+
+Running processes persistenly would make the background process run every time the machine is restarted,and power on/off.
 
 You should use linux [supervisor](http://supervisord.org/index.html)
 
