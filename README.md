@@ -2,7 +2,21 @@
 
 MANIFESTO FOR STARTING AND MAINTAINING OF SOFTWARE APPLICATION PROJECT
 
-## Conventions
+**Table of Contents**
+
+- [ Conventions ](#conventions)
+- [ Guidelines ](#guidelines)
+- [ How to ](#how-to)
+- [ Configurations ](#conventions)
+- [ Common Issues ](#conventions)
+- [ Configurations ](#conventions)
+- [ Editor ](#editor)
+- [ Packages ](#packages)
+
+<br>
+<br>
+
+## Conventions<a name="conventions"></a>
 
 The following are the categorized coding conventions for specified languages
 
@@ -15,7 +29,7 @@ The following are the categorized coding conventions for specified languages
   - [JavaScript](conventions/Javascript.md)
   - [VueJS](conventions/VueJS.md)
 
-## Guidelines
+## Guidelines<a name="guidelines"></a>
 
 - [ Project ](guidelines/project.md)
 
@@ -24,7 +38,7 @@ The following are the categorized coding conventions for specified languages
 
 - [ Code Documentation ](guidelines/code-documentation.md)
 
-## How to
+## How to <a name="how-to"></a>
 
 - **System Administration**
 
@@ -32,43 +46,34 @@ The following are the categorized coding conventions for specified languages
   - [How to run processes in the background](how-to/system_administration/how-to-run-process.md)
 
 - **Creating a project**
+
   - [How to start a project](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-start-a-project.md)
   - [How to build a package](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-build-a-package.md)
-- **Syntax, semantics and structure**
-  - [How to write Swift](https://github.com/nodes-vapor/readme/blob/master/Documentation/guide-how-to-write-swift.md)
+
+- **API**
+
   - [How to write APIs](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-write-apis.md)
-- **Releasing**
-  - [How to release a version](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-release-a-version.md)
-  - [Checklist before going live with a project](https://github.com/nodes-vapor/readme/blob/master/Documentation/checklist-before-going-live.md)
-- **Database**
-  - [How to create an entity relationship diagram](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-create-an-erd.md)
-  - [How to support emojis (utf8mb4)](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-support-emojis.md)
-- **Hosting**
-  - [How to setup environment variables](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-setup-environment-variables.md)
-  - [How to deploy and host Vapor apps](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-deploy-and-host.md)
-- **Third party integrations**
-  - [Push notifications with Urban Airship](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-urban-airship-push.md)
-  - [How to report errors to Bugsnag](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-report-to-bugsnag.md)
-- **Postman**
-  - [How to create Postman collections](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-create-postman-collections.md)
-  - [How to create Postman documentation](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-create-postman-documentation.md)
-  - [How to create Postman API acceptance tests](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-create-postman-tests.md)
+  - **Postman**
+    - [How to create Postman collections](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-create-postman-collections.md)
+    - [How to create Postman documentation](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-create-postman-documentation.md)
+    - [How to create Postman API acceptance tests](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-create-postman-tests.md)
+
 - **Misc**
   - [Tips and tricks](https://github.com/nodes-vapor/readme/blob/master/Documentation/tips-and-tricks.md)
   - [How to use a proxy](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-use-a-proxy.md)
   - [How to upload files](https://github.com/nodes-vapor/readme/blob/master/Documentation/how-to-upload-files.md)
 
-## Configurations
+## Configurations <a name="configurations"></a>
 
 The following are the common configurations:
 
 - [ Git ignore ](configurations/GitIgnore.md)
 
-## Common issues encountered
+## Common issues encountered <a name="common-issues"></a>
 
 - [proc_open(): fork failed - Cannot allocate memory](common_issues/proc_open.md)
 
-## Editor and their awesome extensions
+## Editor and their awesome extensions <a name="editor"></a>
 
 - [ Visual Studio Code ](https://code.visualstudio.com/)
   - [BetterComments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments) Improve your code commenting by annotating with alert, informational, TODOs, and more!
@@ -77,7 +82,7 @@ The following are the common configurations:
   - [TODO Highlight](https://marketplace.visualstudio.com/items?itemName=wayou.vscode-todo-highlight) highlight TODOs, FIXMEs, and any keywords, annotations...
   - [GitLens](https://gitlens.amod.io/) Quickly glimpse into whom, why, and when a line or code block was changed.
 
-## Packages
+## Packages <a name="packages"></a>
 
 ### Made by [ajDesamparado13](https://github.com/ajDesamparado13)
 
