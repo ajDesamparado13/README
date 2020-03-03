@@ -83,10 +83,15 @@ With Better comments extension we're able to categorise comments into the follow
 
 1. Each line of a comment should never be more than 80 characters
 2. For inline comments, as much as possible keep the comments 5 lines max.
+3. For code blocks try to include the following:
+   - @author \WhoMadeThisCode
+   - @params \DescriptionOfTheParameters
+   - @returns \WhatIsTheReturnedDataOrObject
+   - @throws \WhatIsThisExceptionThrown
 
 ### Class / Object
 
-** Class Level Variables **
+**Class Level Variables**
 
 When documenting a class level variable the following should be described.
 
