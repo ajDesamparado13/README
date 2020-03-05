@@ -78,11 +78,11 @@ To use ssh key as a pem key simply rename the private ssh key file `(the file no
 
 1.  [ Create SSH key ](#create-ssh-key)
 
-2.  Rename the key that doesn't end with .pub to repo-name.deploy.pem
+2.  Rename the key that doesn't end with .pub to repo-name.pem
 
 3.  Update key file permission:
 
-        sudo chmod 400 repo-name.deploy.pem
+        sudo chmod 400 repo-name.pem
 
 ## Set SSH key usage through SSH config
 
@@ -139,3 +139,9 @@ To use an ssh/pem key configure the ssh config.
     To check which github remote url is used:
 
          git remote -v
+
+    If remote url of git origin is not ssh. change the remote url by
+
+    To change remote url use:
+
+        git remote set-url origin {ssh-url}
