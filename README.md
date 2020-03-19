@@ -42,6 +42,7 @@ The following are the categorized coding conventions for specified languages
 
 - **System Administration**
 
+  - [How to setup a webserver](how-to/system_administration/how-to-setup-webserver.md)
   - [How to create ssh key](how-to/system_administration/how-to-create-ssh-key.md)
   - [How to create swapfile](how-to/system_administration/how-to-create-swapfile.md)
   - [How to run processes in the background](how-to/system_administration/how-to-run-process.md)
